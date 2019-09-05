@@ -110,7 +110,7 @@ cat >> genesis.json <<EOF
   "coinbase": "0x0000000000000000000000000000000000000000",
   "config": {
     "homesteadBlock": 0,
-    "chainId": 1,
+    "chainId": 10,
     "eip155Block": null,
     "eip158Block": null,
     "isQuorum": true
