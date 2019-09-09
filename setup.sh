@@ -3,10 +3,10 @@
 #### Configuration options #############################################
 . ip.cfg
 
-image=quorum
+image=denny60004/quorum-crux:latest
 GETH='/usr/local/bin/geth'
 BOOTNODE='/usr/local/bin/bootnode'
-CONSTELLATION='/usr/local/bin/constellation-node'
+CONSTELLATION='/usr/local/bin/crux'
 
 ########################################################################
 
@@ -133,7 +133,7 @@ n=1
 for ip in ${ips[*]}
 do
     sep=`[[ $ip != ${ips[0]} ]] && echo ","`
-    nodelist=${nodelist}${sep}'"http://'${ip}':9000/"'
+    nodelist=${nodelist}${sep}"http://${ip}:9000/"
     let n++
 done
 
@@ -160,10 +160,10 @@ do
     -u $uid:$gid \
     -v $pwd/$qd:/qdata \
     --rm \
+    --workdir=/qdata/constellation/keys \
     $image \
     $CONSTELLATION \
-    --workdir=/qdata/constellation/keys \
-    --generatekeys=tm < /dev/null > /dev/null
+    --generate-keys=tm
   echo 'Node '$n' public key: '`cat $qd/constellation/keys/tm.pub`
 
   cp templates/start.sh $qd/start.sh
@@ -199,6 +199,7 @@ do
     ports:
       - $((n+22000)):8545
     user: '$uid:$gid'
+    command: bash /qdata/start.sh
 EOF
 
   let n++
