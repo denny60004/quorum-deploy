@@ -12,14 +12,4 @@ echo -n '_ACCOUNT_KEY_' > $qd/dd/keystore/_ACCOUNT_
 cat << EOF > $qd/tm.conf
 _TMCONF_
 EOF
-cat << EOF > $qd/dd/static-nodes.json
-_STATIC_NODES_
-EOF
-cat << EOF > $qd/genesis.json
-_GENESIS_
-EOF
-cat << EOF > $qd/start.sh
-_SCRIPT_
-EOF
 
-chmod 755 $qd/start.sh

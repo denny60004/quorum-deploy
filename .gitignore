@@ -3,6 +3,8 @@ qdata_*
 examples/
 docker-compose.yml
 consortium.yaml
+quorum_config.yaml
 explorer.yaml
 !templates/consortium.yaml
 !templates/explorer.yaml
+!templates/quorum_config.yaml

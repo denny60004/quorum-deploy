@@ -282,7 +282,7 @@ do
     | sed "s/^/$pad/" \
     | sed '/^[[:space:]]*$/d' \
     > init.sh
-  echo "$pad/qdata/start.sh" >> init.sh
+  echo "$pad bash /qdata/start.sh" >> init.sh
 
   cat templates/consortium.yaml \
     | sed "s;_NODE_ID_;$n;g" \
@@ -298,6 +298,32 @@ do
   let n++
   let port++
 done
+
+# create config map
+pad='    '
+cat $qd/dd/static-nodes.json \
+    | sed "s/^/$pad/" \
+    | sed '/^[[:space:]]*$/d' \
+    > static-nodes.json
+cat $qd/genesis.json \
+    | sed "s/^/$pad/" \
+    | sed '/^[[:space:]]*$/d' \
+    > genesis.json
+cat $qd/start.sh \
+    | sed "s/^/$pad/" \
+    | sed '/^[[:space:]]*$/d' \
+    > start_node.sh
+
+cat templates/quorum_config.yaml \
+  | sed '/_STATIC_NODES_/r static-nodes.json' \
+  | sed '/_STATIC_NODES_/d' \
+  | sed '/_GENESIS_/r genesis.json' \
+  | sed '/_GENESIS_/d' \
+  | sed '/_START_/r start_node.sh' \
+  | sed '/_START_/d' \
+  >> quorum_config.yaml
+
+rm static-nodes.json genesis.json start_node.sh
 
 cat >> consortium.yaml <<EOF
 apiVersion: v1

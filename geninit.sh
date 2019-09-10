@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for n in {1..3}
+for n in {1..4}
 do
   qd=qdata_$n
 

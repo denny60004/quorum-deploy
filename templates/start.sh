@@ -6,13 +6,6 @@ set -e
 TMCONF=/qdata/tm.conf
 GETH=geth
 CONSTELLATION=crux
-GETH_ARGS="--datadir /qdata/dd \
-  --raft --raftport 23000 \
-  --rpc --rpcaddr 0.0.0.0 \
-  --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum \
-  --nodiscover \
-  --emitcheckpoints \
-  --unlock 0 --password /qdata/passwords.txt"
 
 
 if [ ! -d /qdata/dd/geth/chaindata ]; then

@@ -36,13 +36,41 @@ spec:
         - containerPort: 30303
         resources: {}
         volumeMounts:
-        - mountPath: /qdata
-          name: node-_NODE_ID_
+        - name: node-_NODE_ID_
+          mountPath: /qdata
+        - name: quorum-permissioned-config
+          mountPath: /qdata/dd/static-nodes.json
+          subPath: static-nodes.json
+        - name: genesis-config
+          mountPath: /qdata/genesis.json
+          subPath: genesis.json
+        - name: start-config
+          mountPath: /qdata/start.sh
+          subPath: start.sh
+
       restartPolicy: Always
       volumes:
       - name: node-_NODE_ID_
         persistentVolumeClaim:
           claimName: node-_NODE_ID_
+      - name: quorum-permissioned-config
+        configMap:
+          name: quorum-permissioned-config
+          items:
+            - key: static-nodes.json
+              path: static-nodes.json
+      - name: genesis-config
+        configMap:
+          name: genesis-config
+          items:
+            - key: genesis.json
+              path: genesis.json
+      - name: start-config
+        configMap:
+          name: start-config
+          items:
+            - key: start.sh
+              path: start.sh
 status: {}
 ---
 apiVersion: v1
