@@ -282,7 +282,18 @@ do
     | sed "s/^/$pad/" \
     | sed '/^[[:space:]]*$/d' \
     > init.sh
-  echo "$pad bash /qdata/start.sh" >> init.sh
+  echo "$pad""bash /qdata/start.sh" >> init.sh
+
+  pad='    '
+  cat $qd/tm.conf \
+    | sed "s/^/$pad/" \
+    | sed '/^[[:space:]]*$/d' \
+    > tm.conf
+  cat templates/crux_config.yaml \
+    | sed "s;_NODE_ID_;$n;g" \
+    | sed '/_CRUX_/r tm.conf' \
+    | sed '/_CRUX_/d' \
+    >> crux_config.yaml
 
   cat templates/consortium.yaml \
     | sed "s;_NODE_ID_;$n;g" \
@@ -294,7 +305,7 @@ do
     | sed '/_NODE_SCRIPT_/d' \
     >> consortium.yaml
 
-  rm init.sh
+  rm init.sh tm.conf
   let n++
   let port++
 done

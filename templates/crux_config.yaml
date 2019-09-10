@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-_NODE_ID_-crux-config
+  labels:
+    name: node-_NODE_ID_-crux-config
+data:
+  tm.conf: |-
+    _CRUX_
+
+---

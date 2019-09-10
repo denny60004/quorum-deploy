@@ -47,6 +47,9 @@ spec:
         - name: start-config
           mountPath: /qdata/start.sh
           subPath: start.sh
+        - name: crux-config
+          mountPath: /qdata/tm.conf
+          subPath: tm.conf
 
       restartPolicy: Always
       volumes:
@@ -71,6 +74,12 @@ spec:
           items:
             - key: start.sh
               path: start.sh
+      - name: crux-config
+        configMap:
+          name: node-_NODE_ID_-crux-config
+          items:
+            - key: tm.conf
+              path: tm.conf
 status: {}
 ---
 apiVersion: v1
