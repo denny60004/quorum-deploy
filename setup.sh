@@ -294,6 +294,38 @@ do
     | sed '/_CRUX_/r tm.conf' \
     | sed '/_CRUX_/d' \
     >> crux_config.yaml
+  cat $qd/constellation/keys/tm.pub \
+    | base64 \
+    | sed "s/^/$pad/" \
+    | sed '/^[[:space:]]*$/d' \
+    > tm.pub
+  cat $qd/constellation/keys/tm.key \
+    | base64 \
+    | sed "s/^/$pad/" \
+    | sed '/^[[:space:]]*$/d' \
+    > tm.key
+  account=`ls $qd/dd/keystore | head -n 1`
+  cat $qd/dd/keystore/$account \
+    | base64 \
+    | sed "s/^/$pad/" \
+    | sed '/^[[:space:]]*$/d' \
+    > account.key
+  cat $qd/passwords.txt \
+    | base64 \
+    | sed "s/^/$pad/" \
+    | sed '/^[[:space:]]*$/d' \
+    > passwords.txt
+  cat templates/node_secret.yaml \
+    | sed "s;_NODE_ID_;$n;g" \
+    | sed '/_TM_PUB_/r tm.pub' \
+    | sed '/_TM_PUB_/d' \
+    | sed '/_TM_KEY_/r tm.key' \
+    | sed '/_TM_KEY_/d' \
+    | sed '/_ACCOUNT_KEY_/r account.key' \
+    | sed '/_ACCOUNT_KEY_/d' \
+    | sed '/_PASSWORD_/r password.txt' \
+    | sed '/_PASSWORD_/d' \
+    >> node_secret.yaml
 
   cat templates/consortium.yaml \
     | sed "s;_NODE_ID_;$n;g" \
@@ -305,7 +337,7 @@ do
     | sed '/_NODE_SCRIPT_/d' \
     >> consortium.yaml
 
-  rm init.sh tm.conf
+  rm init.sh tm.conf tm.pub tm.key account.key passwords.txt
   let n++
   let port++
 done

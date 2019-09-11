@@ -6,7 +6,9 @@ consortium.yaml
 quorum_config.yaml
 crux_config.yaml
 explorer.yaml
+node_secret.yaml
 !templates/consortium.yaml
 !templates/explorer.yaml
 !templates/quorum_config.yaml
 !templates/crux_config.yaml
+!templates/node_secret.yaml

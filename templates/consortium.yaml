@@ -50,6 +50,18 @@ spec:
         - name: crux-config
           mountPath: /qdata/tm.conf
           subPath: tm.conf
+        - name: crux-publickey-config
+          mountPath: /qdata/constellation/keys/tm.pub
+          subPath: tm.pub
+        - name: crux-privatekey-config
+          mountPath: /qdata/constellation/keys/tm.key
+          subPath: tm.key
+        - name: quorum-privatekey-config
+          mountPath: /qdata/dd/keystore/account.key
+          subPath: account.key
+        - name: quorum-password-config
+          mountPath: /qdata/passwords.txt
+          subPath: passwords.txt
 
       restartPolicy: Always
       volumes:
@@ -80,6 +92,30 @@ spec:
           items:
             - key: tm.conf
               path: tm.conf
+      - name: crux-publickey-config
+        secret:
+          secretName: node-_NODE_ID_-secret
+          items:
+            - key: tm.pub
+              path: tm.pub
+      - name: crux-privatekey-config
+        secret:
+          secretName: node-_NODE_ID_-secret
+          items:
+            - key: tm.key
+              path: tm.key
+      - name: quorum-privatekey-config
+        secret:
+          secretName: node-_NODE_ID_-secret
+          items:
+            - key: account.key
+              path: account.key
+      - name: quorum-password-config
+        secret:
+          secretName: node-_NODE_ID_-secret
+          items:
+            - key: passwords.txt
+              path: passwords.txt
 status: {}
 ---
 apiVersion: v1
@@ -94,7 +130,7 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 80Gi
+      storage: 20Gi
 status: {}
 ---
 apiVersion: v1

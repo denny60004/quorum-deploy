@@ -6,6 +6,7 @@ rm -f consortium.yaml
 rm -f explorer.yaml
 rm -f quorum_config.yaml
 rm -f crux_config.yaml
+rm -f node_secret.yaml
 rm -rf scripts
 
 # Shouldn't be needed, but just in case:
