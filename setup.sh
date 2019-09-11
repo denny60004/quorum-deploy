@@ -392,13 +392,3 @@ status:
   loadBalancer: {}
 EOF
 
-cat templates/explorer.yaml \
-  | sed "s;_EXPLORER_IP_;$explorer_ip;g" \
-  | sed "s;_EXPLORER_UI_PORT_;$explorer_ui_port;g" \
-  | sed "s;_EXPLORER_BACKEND_PORT_;$explorer_backend_port;g" \
-  | sed "s;_NODE_ENDPOINT_IP_;$node_endpoint_ip;g" \
-  | sed "s;_EXPLORER_UI_IMAGE_;$explorer_ui_image;g" \
-  | sed "s;_EXPLORER_BACKEND_IMAGE_;$explorer_backend_image;g" \
-  | sed "s;_EXPLORER_MONGO_IMAGE_;$explorer_mongo_image;g" \
-  | sed "s;_IMAGE_PULL_POLICY_;$image_pull_policy;g" \
-  >> explorer.yaml

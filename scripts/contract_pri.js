@@ -2,7 +2,7 @@
 // Create a contract private with the nodes with addresses in toKey
 //
 
-var toKeys=["a4K6rBS5EvzlnrIGQF9wOKZAalw06FJwpiG5Ke6aoQ0="];
+var toKeys=["jw3bmEKP4tC5w4N+OIbaGvjgGpZky3q7q4za3BOi+ng="];
 
 a = eth.accounts[0]
 web3.eth.defaultAccount = a;

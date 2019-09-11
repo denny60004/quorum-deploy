@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    node.number: "3"
+    node.number: "4"
     node.current: "_NODE_ID_"
   creationTimestamp: null
   labels:
