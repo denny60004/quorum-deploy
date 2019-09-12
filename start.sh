@@ -8,4 +8,4 @@
 ./setup.sh
 # minikube start
 kubectl config use-context minikube
-# kubectl create -f quorum_config.yaml,crux_config.yaml,node_secret.yaml,consortium.yaml
+# kubectl create -f quorum_config.yaml,crux_config.yaml,backend_config.yaml,node_secret.yaml,consortium.yaml

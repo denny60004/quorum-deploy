@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-_NODE_ID_-backend-config
+  labels:
+    name: node-_NODE_ID_-backend-config
+data:
+  setup.conf: |-
+    _BACKEND_
+
+---

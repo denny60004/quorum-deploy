@@ -63,6 +63,21 @@ spec:
           mountPath: /qdata/passwords.txt
           subPath: passwords.txt
 
+      - image: _EXPLORER_IMAGE_
+        imagePullPolicy: _IMAGE_PULL_POLICY_
+        workingDir: /root/quorum-maker
+        name: n_NODE_ID_-explorer
+        command: ["/bin/bash", "start_nodemanager.sh", "8545", "22004"]
+        ports:
+        - containerPort: 22004
+        resources: {}
+        volumeMounts:
+        - name: backend-config
+          mountPath: /home/setup.conf
+          subPath: setup.conf
+        - name: genesis-config
+          mountPath: /home/node/genesis.json
+          subPath: genesis.json
       restartPolicy: Always
       volumes:
       - name: node-_NODE_ID_
@@ -92,6 +107,12 @@ spec:
           items:
             - key: tm.conf
               path: tm.conf
+      - name: backend-config
+        configMap:
+          name: node-_NODE_ID_-backend-config
+          items:
+            - key: setup.conf
+              path: setup.conf
       - name: crux-publickey-config
         secret:
           secretName: node-_NODE_ID_-secret
@@ -160,6 +181,10 @@ spec:
   - name: tx
     port: 30303
     targetPort: 30303
+  - name: backend
+    nodePort: 30_NODE_ID_04
+    port: 22004
+    targetPort: 22004
   selector:
     service.rpc: node-_NODE_ID_
 status:
