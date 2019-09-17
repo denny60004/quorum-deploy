@@ -315,30 +315,4 @@ cat templates/quorum_config.yaml \
 
 rm static-nodes.json genesis.json start_node.sh
 
-cat >> consortium.yaml <<EOF
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    app: consortiumchain
-    version: '1'
-  creationTimestamp: null
-  labels:
-    name: node-endpoint
-  name: node-endpoint
-spec:
-  type: LoadBalancer
-  clusterIP: $node_endpoint_ip
-  ports:
-  - name: rpc
-    port: 8545
-    targetPort: 8545
-  - name: backend
-    port: 22004
-    targetPort: 22004
-  selector:
-    app: consortiumchain
-status:
-  loadBalancer: {}
-EOF
 
