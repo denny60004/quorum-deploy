@@ -25,7 +25,9 @@ done
 
 echo "[*] Starting node"
 PRIVATE_CONFIG=/qdata/constellation/tm.ipc nohup geth --datadir /qdata/dd \
-  --raft --raftport 23000 \
+  --gcmode=archive \
+  --syncmode full --mine --minerthreads 2 \
+  --networkid 55929 \
   --rpc --rpcaddr 0.0.0.0 \
   --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum \
   --nodiscover \

@@ -97,11 +97,15 @@ do
     --datadir=/qdata/dd \
     --password /qdata/passwords.txt \
     account new | cut -c 11-50`
+  if [ $n -eq 1 ]
+  then
+    blockproducer=${account}
+  fi 
 
   # Add the account to the genesis block so it has some Ether at start-up
   sep=`[[ $n < $nnodes ]] && echo ","`
   cat >> genesis.json <<EOF
-    "${account}": {
+    "0x${account}": {
       "balance": "1000000000000000000000000000"
     }${sep}
 EOF
@@ -113,14 +117,21 @@ cat >> genesis.json <<EOF
   },
   "coinbase": "0x0000000000000000000000000000000000000000",
   "config": {
+    "chainId": 55929,
     "homesteadBlock": 0,
-    "chainId": 10,
-    "eip155Block": null,
-    "eip158Block": null,
+    "byzantiumBlock": 1,
+    "eip150Block": 1,
+    "eip155Block": 0,
+    "eip150Hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "eip158Block": 1,
+    "clique": {
+      "period": 0,
+      "epoch": 30000
+    },
     "isQuorum": true
   },
   "difficulty": "0x0",
-  "extraData": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "extraData": "0x0000000000000000000000000000000000000000000000000000000000000000${blockproducer}0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
   "gasLimit": "0xE0000000",
   "mixhash": "0x00000000000000000000000000000000000000647572616c65787365646c6578",
   "nonce": "0x0",
